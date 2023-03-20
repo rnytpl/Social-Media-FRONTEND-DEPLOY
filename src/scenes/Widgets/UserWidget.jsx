@@ -23,7 +23,9 @@ const UserWidget = ({ userId }) => {
     }),
   });
   const { user } = data;
-  console.log(user);
+  if (!user) {
+    return <p>Dadada...</p>;
+  }
 
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;

@@ -1,4 +1,6 @@
 import { Box, useMediaQuery } from "@mui/material";
+import { useGetPostsQuery } from "features/posts/postsApiSlice";
+import { useGetUsersQuery } from "features/users/usersApiSlice";
 import { useSelector } from "react-redux";
 import AdvertWidget from "scenes/Widgets/AdvertWidget";
 import FriendsListWidget from "scenes/Widgets/FriendsListWidget";
@@ -10,9 +12,20 @@ const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const isExtraLargeScreens = useMediaQuery("(min-width: 1400px");
   const isXXLScreens = useMediaQuery("(min-width: 1600px");
-
+  const { data, isLoading, isSuccess, isError, error } = useGetUsersQuery(
+    "usersList",
+    {
+      pollingInterval: 15000,
+      refetchOnMountOrArgChange: true,
+      refetchOnFocus: true,
+    }
+  );
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
+
+  if (isLoading) {
+    return <p>is Loading...</p>;
+  }
+
   return (
     <Box
       width={
