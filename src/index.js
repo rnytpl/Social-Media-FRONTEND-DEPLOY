@@ -12,15 +12,13 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 if (process.env.NODE_ENV === "production") disableReactDevTools();
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <Router>
-          <Routes>
-            <Route path="/*" element={<App />} />
-          </Routes>
-        </Router>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <Router>
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </Router>
+    </PersistGate>
+  </Provider>
 );
