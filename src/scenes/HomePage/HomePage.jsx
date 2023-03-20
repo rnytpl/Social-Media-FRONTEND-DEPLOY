@@ -11,8 +11,8 @@ const HomePage = () => {
   const isExtraLargeScreens = useMediaQuery("(min-width: 1400px");
   const isXXLScreens = useMediaQuery("(min-width: 1600px");
 
-  const { _id: id } = useSelector((state) => state.auth.user);
-
+  const user = useSelector((state) => state.auth.user);
+  console.log(user);
   return (
     <Box
       width={
@@ -34,7 +34,7 @@ const HomePage = () => {
         justifyContent="space-between"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <UserWidget userId={id} />
+          <UserWidget userId={user._id} />
         </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}

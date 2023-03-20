@@ -14,13 +14,15 @@ import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "features/users/usersApiSlice";
 
 const UserWidget = ({ userId }) => {
+  console.log(userId, "userwidget");
   const { palette } = useTheme();
   const navigate = useNavigate();
-  const { user } = useGetUsersQuery("usersList", {
+  const data = useGetUsersQuery("usersList", {
     selectFromResult: ({ data }) => ({
       user: data?.entities[userId],
     }),
   });
+  const { user } = data;
 
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
