@@ -1,12 +1,17 @@
 import { Box } from "@mui/material";
-import { selectUserById } from "features/users/usersApiSlice";
+import { selectUserById, useGetUsersQuery } from "features/users/usersApiSlice";
 import { useSelector } from "react-redux";
 
 const CommentUserImage = ({ image, userId, size = "25px" }) => {
   console.log(userId, "userId CommentUserImage");
-  const commentOwner = useSelector((state) => selectUserById(state, userId));
+  // const commentOwner = useSelector((state) => selectUserById(state, userId));
+  const { user } = useGetUsersQuery("usersList", {
+    selectFromResult: ({ data }) => ({
+      user: data.entities[userId],
+    }),
+  });
 
-  console.log(commentOwner, "commentOwner");
+  console.log(user, "commentOwner");
   return (
     <Box width={size} height={size} mb="0.5rem">
       <img
@@ -14,7 +19,7 @@ const CommentUserImage = ({ image, userId, size = "25px" }) => {
         width={size}
         height={size}
         alt="user"
-        src={commentOwner.picturePath}
+        src={user.picturePath}
       />
     </Box>
   );
