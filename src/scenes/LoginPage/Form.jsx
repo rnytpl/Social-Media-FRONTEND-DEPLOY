@@ -61,7 +61,7 @@ const Form = () => {
     setEmail("");
     setOccupation("");
     setLocation("");
-    setPicture(null);
+    setPicture("");
     setPicturePath("");
     setPageType("login");
   };

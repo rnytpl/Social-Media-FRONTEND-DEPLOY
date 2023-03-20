@@ -23,6 +23,7 @@ const UserWidget = ({ userId }) => {
     }),
   });
   const { user } = data;
+  console.log(user);
 
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
