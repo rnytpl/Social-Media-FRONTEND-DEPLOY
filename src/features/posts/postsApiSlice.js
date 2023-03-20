@@ -5,7 +5,6 @@ import { parseISO } from "date-fns";
 const postsAdapter = createEntityAdapter({
   sortComparer: (a, b) => {
     // const date = parseISO(a.createdAt);
-    // console.log(date, "date");
     return parseISO(b.createdAt) - parseISO(a.createdAt);
   },
 });
@@ -20,7 +19,6 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
       transformResponse: (responseData) => {
-        // console.log(responseData, "responseData");
         const loadedPosts = responseData.map((post) => {
           post.id = post._id;
           return post;
@@ -45,7 +43,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
     }),
     createPost: builder.mutation({
       query: ([data]) => ({
-        url: "/posts",
+        url: "/posts/createPost",
         method: "POST",
         body: data,
       }),
@@ -93,25 +91,3 @@ export const {
   useAddFriendMutation,
   useCreateCommentMutation,
 } = postsApiSlice;
-
-// Select results object returned from getPosts query hook
-const selectPostsResults = postsApiSlice.endpoints.getPosts.select();
-// console.log(selectPostsResults, "selectPostsResults");
-
-// selectPostsResults will return a result object
-// This result object will be passed to function as an argument
-// postsResult.data will be returned as the result of the function and memoized by createSelector
-// Everytime createSelector will run and check if the results match with previously returned results
-// In the case of changes, it'll re-run the createSelector function and update values
-const selectPostsData = createSelector(selectPostsResults, (postsResult) => {
-  console.log(postsResult, "postsResult");
-  return postsResult.data;
-});
-
-export const {
-  selectAll: selectAllPosts,
-  selectById: selectPostById,
-  selectIds: selectPostIds,
-} = postsAdapter.getSelectors(
-  (state) => selectPostsData(state) ?? initialState
-);

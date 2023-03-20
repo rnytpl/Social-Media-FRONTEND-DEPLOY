@@ -202,7 +202,6 @@ const Form = () => {
                 acceptedFiles=".jpeg,.jpeg,.png"
                 multiple={false}
                 onDrop={(acceptedFiles) => {
-                  console.log(acceptedFiles);
                   setPicture(acceptedFiles[0]);
                 }}
               >

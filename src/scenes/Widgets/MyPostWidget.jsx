@@ -87,7 +87,6 @@ const MyPostWidget = () => {
             acceptedFiles=".jpeg,.jpeg,.png"
             multiple={false}
             onDrop={(acceptedFiles) => {
-              console.log(acceptedFiles);
               setImage(acceptedFiles[0]);
             }}
           >

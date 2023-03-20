@@ -8,7 +8,6 @@ const CommentUserImage = ({ userId, size = "25px" }) => {
     }),
   });
 
-  console.log(user, "commentOwner");
   return (
     <Box width={size} height={size} mb="0.5rem">
       <img

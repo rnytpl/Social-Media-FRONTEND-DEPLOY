@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "features/users/usersApiSlice";
 
 const UserWidget = ({ userId }) => {
-  console.log(userId, "userwidget");
   const { palette } = useTheme();
   const navigate = useNavigate();
   const data = useGetUsersQuery("usersList", {
@@ -23,6 +22,7 @@ const UserWidget = ({ userId }) => {
     }),
   });
   const { user } = data;
+
   if (!user) {
     return <p>Dadada...</p>;
   }
