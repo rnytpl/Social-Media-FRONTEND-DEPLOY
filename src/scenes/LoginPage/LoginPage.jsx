@@ -3,23 +3,26 @@ import Form from "./Form";
 
 const LoginPage = () => {
   const theme = useTheme();
-  const isExtraLargeScreen = useMediaQuery("(min-width: 1500px)");
-  const isLargeScreen = useMediaQuery("(min-width: 1300px)");
-  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const isXXLScreen = useMediaQuery("(min-width: 1400px)");
+  const isExtraLargeScreen = useMediaQuery("(min-width: 1200px)");
+  const isLargeScreen = useMediaQuery("(min-width: 1000px)");
+  const isNonMobileScreens = useMediaQuery("(min-width: 800px)");
   const isSmallScreen = useMediaQuery("(min-width: 600px)");
 
   return (
     <Box
       width={
-        isExtraLargeScreen
+        isXXLScreen
           ? "25%"
+          : isExtraLargeScreen
+          ? "35%"
           : isLargeScreen
-          ? "30%"
-          : isNonMobileScreens
           ? "50%"
+          : isNonMobileScreens
+          ? "70%"
           : isSmallScreen
-          ? "60%"
-          : "60%"
+          ? "80%"
+          : "90%"
       }
       p="2rem"
       m="2rem auto"

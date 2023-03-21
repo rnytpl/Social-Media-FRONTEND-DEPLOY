@@ -32,6 +32,8 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const theme = useTheme();
+  const isXXLScreen = useMediaQuery("(min-width:1400px)");
+
   const isNonMobileScreen = useMediaQuery("(min-width:1000px)");
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
 
@@ -47,10 +49,11 @@ export const Navbar = () => {
   }));
 
   return (
-    <Box backgroundColor={alt} width="100vw" m="auto" textAlign="center">
+    <Box backgroundColor={alt} m="auto" textAlign="center">
       <FlexBetween
         gap="2rem"
-        sx={{ width: "80vw", p: "1.15rem 2.75rem", m: "auto" }}
+        width={isXXLScreen ? "65vw" : "80vw"}
+        sx={{ p: "1.15rem 2.75rem", m: "auto" }}
       >
         <FlexBetween gap="2.25rem">
           <Typography fontWeight="bold" fontSize="32px" color="primary">
@@ -155,24 +158,37 @@ export const Navbar = () => {
                 />
               </MenuItem>
             </Box>
-
-            <MenuItem
-              sx={{
-                padding: "1rem 2rem",
-                textAlign: "center",
-              }}
-            >
-              {user?.firstName}
-            </MenuItem>
-            <MenuItem
-              sx={{
-                padding: "1rem 2rem",
-                textAlign: "center",
-              }}
-              onClick={() => dispatch(logout())}
-            >
-              Logout
-            </MenuItem>
+            {user ? (
+              <>
+                <MenuItem
+                  sx={{
+                    padding: "1rem 2rem",
+                    textAlign: "center",
+                  }}
+                >
+                  {user?.firstName}
+                </MenuItem>
+                <MenuItem
+                  sx={{
+                    padding: "1rem 2rem",
+                    textAlign: "center",
+                  }}
+                  onClick={() => dispatch(logout())}
+                >
+                  Logout
+                </MenuItem>
+              </>
+            ) : (
+              <MenuItem
+                sx={{
+                  padding: "1rem 2rem",
+                  textAlign: "center",
+                }}
+                onClick={() => navigate("login")}
+              >
+                Login
+              </MenuItem>
+            )}
           </Box>
         )}
       </FlexBetween>

@@ -2,14 +2,11 @@ import { useGetPostsQuery } from "features/posts/postsApiSlice";
 import PostWidget from "./PostWidget";
 
 const PostsWidget = () => {
-  const { data, isLoading, isSuccess, isError, error } = useGetPostsQuery(
-    "postsList",
-    {
-      pollingInterval: 15000,
-      refetchOnMountOrArgChange: true,
-      refetchOnFocus: true,
-    }
-  );
+  const { data, isLoading } = useGetPostsQuery("postsList", {
+    pollingInterval: 15000,
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+  });
   const { ids } = data;
 
   if (isLoading) {

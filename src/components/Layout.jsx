@@ -6,7 +6,7 @@ import Navbar from "scenes/Navbar/Navbar";
 import { themeSettings } from "theme";
 
 const Layout = () => {
-  const { mode, user } = useSelector((state) => state.auth);
+  const { mode } = useSelector((state) => state.auth);
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 

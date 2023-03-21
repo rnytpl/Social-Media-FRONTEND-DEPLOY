@@ -1,5 +1,4 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { useGetPostsQuery } from "features/posts/postsApiSlice";
 import { useGetUsersQuery } from "features/users/usersApiSlice";
 import { useSelector } from "react-redux";
 import AdvertWidget from "scenes/Widgets/AdvertWidget";
@@ -12,14 +11,11 @@ const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const isExtraLargeScreens = useMediaQuery("(min-width: 1400px");
   const isXXLScreens = useMediaQuery("(min-width: 1600px");
-  const { data, isLoading, isSuccess, isError, error } = useGetUsersQuery(
-    "usersList",
-    {
-      pollingInterval: 15000,
-      refetchOnMountOrArgChange: true,
-      refetchOnFocus: true,
-    }
-  );
+  const { isLoading } = useGetUsersQuery("usersList", {
+    pollingInterval: 15000,
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+  });
   const user = useSelector((state) => state.auth.user);
 
   if (isLoading) {
@@ -35,7 +31,7 @@ const HomePage = () => {
           ? "90vw"
           : isNonMobileScreens
           ? "100vw"
-          : "60vw"
+          : "90vw"
       }
       sx={{ m: "auto" }}
     >

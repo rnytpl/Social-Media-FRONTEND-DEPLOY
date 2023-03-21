@@ -15,6 +15,7 @@ const FriendsListWidget = () => {
   const filteredUsers = friends.map((friendId) => {
     return entities[friendId];
   });
+
   if (isLoading) {
     return <p>Loading...</p>;
   }

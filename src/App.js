@@ -7,6 +7,7 @@ import UserWidget from "scenes/Widgets/UserWidget";
 import ProfilePage from "scenes/ProfilePage/ProfilePage";
 import Prefetch from "features/auth/Prefetch";
 import Layout from "components/Layout";
+import Public from "scenes/HomePage/Public";
 
 const App = () => {
   const { user } = useSelector((state) => state.auth);
@@ -17,6 +18,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+        <Route index element={<Public />} />
         <Route element={<Prefetch />}>
           <Route path="/home" element={user ? <HomePage /> : <LoginPage />} />
           <Route path="/:id" element={user ? <UserWidget /> : <LoginPage />} />

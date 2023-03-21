@@ -117,7 +117,6 @@ const Form = () => {
     password,
     occupation,
     location,
-    picture,
   ].every(Boolean);
 
   const loginCanSave = [email, password].every(Boolean);

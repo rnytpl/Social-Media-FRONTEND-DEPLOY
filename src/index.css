@@ -17,3 +17,11 @@ body,
 .default-link:visited {
   color: rgb(60, 129, 227);
 }
+
+.index-image {
+  border-radius: 5%;
+}
+
+.index-image:hover {
+  scale: 102%;
+}
