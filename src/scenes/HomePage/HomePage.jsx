@@ -1,4 +1,5 @@
 import { Box, useMediaQuery } from "@mui/material";
+import { useGetPostsQuery } from "features/posts/postsApiSlice";
 import { useGetUsersQuery } from "features/users/usersApiSlice";
 import { useSelector } from "react-redux";
 import AdvertWidget from "scenes/Widgets/AdvertWidget";
@@ -12,11 +13,16 @@ const HomePage = () => {
   const isExtraLargeScreens = useMediaQuery("(min-width: 1400px");
   const isXXLScreens = useMediaQuery("(min-width: 1600px");
   const { isLoading } = useGetUsersQuery("usersList", {
-    pollingInterval: 15000,
+    pollingInterval: 1500000000000,
     refetchOnMountOrArgChange: true,
     refetchOnFocus: true,
   });
   const user = useSelector((state) => state.auth.user);
+  // const { post } = useGetPostsQuery("postsList", {
+  //   selectFromResult: ({ data }) => ({
+  //     post: data?.entities[postId],
+  //   }),
+  // });
 
   if (isLoading) {
     return <p>is Loading...</p>;

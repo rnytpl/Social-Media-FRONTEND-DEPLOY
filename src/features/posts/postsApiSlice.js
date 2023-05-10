@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
+import { createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "api/apiSlice";
 import { parseISO } from "date-fns";
 
@@ -62,6 +62,19 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         return [{ type: "Post", id: arg.postId }];
       },
     }),
+    editComment: builder.mutation({
+      query: ([postId, commentId, editComment]) => ({
+        url: `posts/${postId}`,
+        method: "PUT",
+        body: {
+          commentId,
+          editComment,
+        },
+      }),
+      invalidatesTags: (result, err, arg) => {
+        return [{ type: "Post", id: arg.postId }];
+      },
+    }),
     likePost: builder.mutation({
       query: ({ postId, userId }) => ({
         url: `posts/${postId}/like`,
@@ -90,4 +103,5 @@ export const {
   useLikePostMutation,
   useAddFriendMutation,
   useCreateCommentMutation,
+  useEditCommentMutation,
 } = postsApiSlice;

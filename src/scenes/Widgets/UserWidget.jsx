@@ -10,7 +10,7 @@ import { Box, Typography, Divider, useTheme } from "@mui/material";
 import UserImage from "components/UserImage";
 import { FlexBetween } from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "features/users/usersApiSlice";
 
 const UserWidget = ({ userId }) => {
@@ -100,7 +100,10 @@ const UserWidget = ({ userId }) => {
 
         <FlexBetween gap="1rem" mb="0.5rem">
           <FlexBetween gap="1rem">
-            <Twitter fontSize="large" />
+            <Link to="https://twitter.com">
+              <Twitter fontSize="large" sx={{ color: "#1D9BF0" }} />
+            </Link>
+
             <Box>
               <Typography color={main} fontWeight="500">
                 Twitter
@@ -113,11 +116,14 @@ const UserWidget = ({ userId }) => {
 
         <FlexBetween gap="1rem" mb="0.5rem">
           <FlexBetween gap="1rem">
-            <LinkedIn fontSize="large" sx={{}} />
+            <Link to="https://linkedin.com">
+              <LinkedIn fontSize="large" sx={{ color: "#0A66C2" }} />
+            </Link>
             <Box>
               <Typography color={main} fontWeight="500">
                 LinkedIn
               </Typography>
+
               <Typography color={medium}>Network Platform</Typography>
             </Box>
           </FlexBetween>

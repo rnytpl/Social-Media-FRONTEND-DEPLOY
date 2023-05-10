@@ -1,8 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "../api/apiSlice";
 import { authSlice } from "../features/auth/authSlice";
 import { persistStore, persistReducer } from "redux-persist";

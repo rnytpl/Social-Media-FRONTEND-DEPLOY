@@ -3,13 +3,23 @@ import {
   FavoriteBorderOutlined,
   FavoriteOutlined,
   ShareOutlined,
+  Edit,
+  Check,
 } from "@mui/icons-material";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { FlexBetween } from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import {
+  useEditCommentMutation,
   useGetPostsQuery,
   useLikePostMutation,
 } from "features/posts/postsApiSlice";
@@ -23,13 +33,21 @@ const PostWidget = ({ postId }) => {
       post: data?.entities[postId],
     }),
   });
+
   const [isComments, setIsComments] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editComment, setEditComment] = useState("");
   const { palette } = useTheme();
   const user = useSelector((state) => state.auth.user);
   const isLiked = Boolean(post.likes[user._id]);
-  // const primaryLight = palette.primary.main;
   const main = palette.neutral.main;
   const [likePostMutation] = useLikePostMutation();
+  const [editCommentMutation] = useEditCommentMutation();
+  const editCommentHandler = (commentId) => {
+    console.log(postId, "postId");
+    setIsEdit(!isEdit);
+    editCommentMutation([postId, commentId, editComment]);
+  };
 
   return (
     <WidgetWrapper mb="1.25rem">
@@ -75,9 +93,42 @@ const PostWidget = ({ postId }) => {
       {isComments && (
         <Box>
           {post.comments.map((comment) => (
-            <Box key={comment._id} mt="1rem">
-              <FlexBetween sx={{ justifyContent: "flex-start" }}>
-                <CommentUserImage userId={comment.userId} />
+            <Box key={comment._id} mt="1rem" display="flex" width="100%">
+              <CommentUserImage userId={comment.userId} />
+              {user._id === comment.userId ? (
+                <Box display="flex" justifyContent="space-between" width="100%">
+                  {isEdit === comment._id ? (
+                    <TextField
+                      defaultValue={comment.comment}
+                      size="small"
+                      sx={{ ml: "0.5rem" }}
+                      onChange={(e) => setEditComment(e.target.value)}
+                      variant="standard"
+                      multiline
+                      fullWidth
+                    />
+                  ) : (
+                    <Typography
+                      sx={{
+                        color: main,
+                        m: "0.5rem",
+                        pl: "1rem",
+                      }}
+                    >
+                      {comment.comment}
+                    </Typography>
+                  )}
+                  {isEdit === comment._id ? (
+                    <IconButton onClick={() => editCommentHandler(comment._id)}>
+                      <Check />
+                    </IconButton>
+                  ) : (
+                    <IconButton onClick={() => setIsEdit(comment._id)}>
+                      <Edit />
+                    </IconButton>
+                  )}
+                </Box>
+              ) : (
                 <Typography
                   sx={{
                     color: main,
@@ -87,11 +138,12 @@ const PostWidget = ({ postId }) => {
                 >
                   {comment.comment}
                 </Typography>
-              </FlexBetween>
+              )}
             </Box>
           ))}
         </Box>
       )}
+
       <CommentBox userId={user._id} postId={postId} />
     </WidgetWrapper>
   );

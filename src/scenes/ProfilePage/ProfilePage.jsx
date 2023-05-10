@@ -1,6 +1,5 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { selectAllPosts, useGetPostsQuery } from "features/posts/postsApiSlice";
-import { useSelector } from "react-redux";
+import { useGetPostsQuery } from "features/posts/postsApiSlice";
 import { useParams } from "react-router-dom";
 import AdvertWidget from "scenes/Widgets/AdvertWidget";
 import FriendsListWidget from "scenes/Widgets/FriendsListWidget";
