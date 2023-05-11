@@ -4,7 +4,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://sociopedia-api-dso2.onrender.com",
-    // baseUrl: process.env.REACT_APP_DEV,
+    // baseUrl: "http://localhost:3500",
     prepareHeaders: (headers, { getState }) => {
       // getState allows you to access your redux store
       const token = getState().auth.token;

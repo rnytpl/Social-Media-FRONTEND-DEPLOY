@@ -35,8 +35,6 @@ const Form = () => {
   const [picture, setPicture] = useState(null);
   const [picturePath, setPicturePath] = useState("");
 
-  console.log(email);
-
   const [
     register,
     {
