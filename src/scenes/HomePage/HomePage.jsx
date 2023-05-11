@@ -13,7 +13,7 @@ const HomePage = () => {
   const isExtraLargeScreens = useMediaQuery("(min-width: 1400px");
   const isXXLScreens = useMediaQuery("(min-width: 1600px");
   const { isLoading } = useGetUsersQuery("usersList", {
-    pollingInterval: 1500000000000,
+    pollingInterval: 15000,
     refetchOnMountOrArgChange: true,
     refetchOnFocus: true,
   });
