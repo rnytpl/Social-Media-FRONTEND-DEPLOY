@@ -14,6 +14,7 @@ export const authSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       const { findUser, token, message } = action.payload;
+      console.log(findUser);
       if (message) {
         state.isError = message;
       }
